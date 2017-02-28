@@ -4,10 +4,13 @@
   "description": "Starter kit for starting a productive javascript application. Creating a \"pit of success\" so that stuff is built correctly without having to re-look up everything all the time.",
   "main": "index.js",
   "scripts": {
-    "prestart": "node scripts/serverMessage.js",
-    "start": "node scripts/server.js",
+    "prestart": "babel-node scripts/serverMessage.js",
+    "start": "npm-run-all --parallel security-check start:server",
+    "start:server": "babel-node scripts/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "security": "nsp check"
+    "security-check": "nsp check",
+    "localtunnel": "lt --port 3000",
+    "share": "npm-run-all --parallel start:server localtunnel"
   },
   "dependencies": {
     "express": "^4.14.1",
@@ -15,7 +18,10 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
+    "babel-cli": "^6.23.0",
     "chalk": "^1.1.3",
+    "localtunnel": "^1.8.2",
+    "npm-run-all": "^4.0.2",
     "nsp": "^2.6.2"
   },
   "repository": {
